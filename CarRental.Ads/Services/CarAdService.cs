@@ -1,5 +1,5 @@
 ﻿using CarRental.Ads.Data;
-using CarRental.Ads.Messages;
+using CarRental.Infrastructure.Messages;
 using MassTransit;
 
 namespace CarRental.Ads.Services

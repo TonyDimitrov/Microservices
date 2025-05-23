@@ -1,5 +1,6 @@
 ﻿using CarRental.Ads.Data;
 using CarRental.Ads.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CarRental.Ads.Controllers
@@ -27,6 +28,7 @@ namespace CarRental.Ads.Controllers
         }
 
         [HttpPost("create")]
+        [Authorize]
         public async Task<IActionResult> Create(CarAdd carAdd)
         {
             await _service.Crete(carAdd);

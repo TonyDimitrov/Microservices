@@ -1,4 +1,4 @@
-﻿using CarRental.Ads.Messages;
+﻿using CarRental.Infrastructure.Messages;
 using CarRental.Dealers.Services;
 using MassTransit;
 

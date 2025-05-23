@@ -1,11 +1,13 @@
 ﻿using CarRental.Dealers.Data;
 using CarRental.Dealers.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CarRental.Dealers.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class DealerController : ControllerBase
     {
         IDealerService _dealerService;
@@ -15,7 +17,7 @@ namespace CarRental.Dealers.Controllers
             _dealerService = dealerService;
         }
 
-        [HttpGet(Name = "Get")]
+        [HttpGet("get")]
         public async Task<IActionResult> Get(int id)
         {
             var result = await _dealerService.GetAsync(id);
@@ -25,7 +27,7 @@ namespace CarRental.Dealers.Controllers
             return Ok(result);
         }
 
-        [HttpPost(Name = "Create")]
+        [HttpPost("create")]        
         public async Task<IActionResult> Create(Dealer dealer)
         {
             _dealerService.Create(dealer);

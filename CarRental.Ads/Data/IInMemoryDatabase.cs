@@ -1,6 +1,4 @@
-﻿using CarRental.Ads.Data;
-
-namespace CarRental.Ads.Services
+﻿namespace CarRental.Ads.Data
 {
     public interface IInMemoryDatabase
     {

@@ -1,4 +1,4 @@
-﻿namespace CarRental.Ads.Messages
+﻿namespace CarRental.Infrastructure.Messages
 {
     public class CarAdCreatedMessage
     {

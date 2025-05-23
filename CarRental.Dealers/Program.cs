@@ -2,7 +2,12 @@
 using CarRental.Dealers.Data;
 using CarRental.Dealers.Messages;
 using CarRental.Dealers.Services;
+using CarRental.Infrastructure.Extensions;
 using MassTransit;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.DataProtection.KeyManagement;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace CarRental.Dealers
 {
@@ -11,8 +16,6 @@ namespace CarRental.Dealers
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
-
-            // Add services to the container.
 
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -35,6 +38,9 @@ namespace CarRental.Dealers
                     });
                 });
             });
+
+            var config = builder.Configuration.GetSection("JwtSettings");
+            builder.Services.AddJwtAuthentication(config["Key"], config["Issuer"], config["Audience"]);
 
             var app = builder.Build();
 

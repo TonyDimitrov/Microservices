@@ -1,6 +1,7 @@
 
-using CarRental.Ads.Messages;
+using CarRental.Ads.Data;
 using CarRental.Ads.Services;
+using CarRental.Infrastructure.Extensions;
 using MassTransit;
 
 namespace CarRental.Ads
@@ -29,6 +30,9 @@ namespace CarRental.Ads
                     cfg.ConfigureEndpoints(bus);
                 });
             });
+
+            var config = builder.Configuration.GetSection("JwtSettings");
+            builder.Services.AddJwtAuthentication(config["Key"], config["Issuer"], config["Audience"]);
 
             var app = builder.Build();
 
