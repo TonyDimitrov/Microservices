@@ -1,6 +1,8 @@
 
 using CarRental.Dealers.Data;
+using CarRental.Dealers.Messages;
 using CarRental.Dealers.Services;
+using MassTransit;
 
 namespace CarRental.Dealers
 {
@@ -19,6 +21,20 @@ namespace CarRental.Dealers
 
             builder.Services.AddSingleton<IInMemoryData, InMemoryData>();
             builder.Services.AddTransient<IDealerService, DealerService>();
+            builder.Services.AddMassTransit(mt =>
+            {
+                mt.AddConsumer<CarAdCreatedConsumer>();
+                mt.UsingRabbitMq((bus, cfg) =>
+                {
+                    cfg.Host("localhost");
+
+                    cfg.ConfigureEndpoints(bus);
+                    cfg.ReceiveEndpoint("car-advert", endpoint =>
+                    {
+                        endpoint.ConfigureConsumer<CarAdCreatedConsumer>(bus);
+                    });
+                });
+            });
 
             var app = builder.Build();
 

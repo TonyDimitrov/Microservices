@@ -2,9 +2,9 @@
 
 namespace CarRental.Ads.Services
 {
-    public interface ICarAddService
+    public interface ICarAdService
     {
         Task<CarAdd> Get(int id);
-        void Crete(CarAdd carAdd);
+        Task Crete(CarAdd carAdd);
     }
 }

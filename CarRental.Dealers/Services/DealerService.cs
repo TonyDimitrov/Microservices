@@ -1,4 +1,5 @@
 ﻿using CarRental.Dealers.Data;
+using System.Reflection.Metadata.Ecma335;
 
 namespace CarRental.Dealers.Services
 {
@@ -19,6 +20,16 @@ namespace CarRental.Dealers.Services
         public void Create(Dealer dealer)
         {
             _inMemoryData.Dealers.Add(dealer);
+        }
+
+        public bool Update(int dealerId, int carAdId)
+        {
+            var dealer =_inMemoryData.Dealers.FirstOrDefault(d => d.Id == dealerId);
+            if (dealer == null) return false;
+
+            dealer.CarAds.Add(carAdId);
+
+            return true;
         }
     }
 }

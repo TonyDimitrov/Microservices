@@ -6,18 +6,18 @@ namespace CarRental.Ads.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CarsController : ControllerBase
+    public class CarAdController : ControllerBase
     {
-        IInMemoryDatabase _database;
-        public CarsController(IInMemoryDatabase database)
+        ICarAdService _service;
+        public CarAdController(ICarAdService service)
         {
-            _database = database;
+            _service = service;
         }
 
         [HttpGet("get")]
         public IActionResult Get(int id)
         {
-            var result = _database.CarAdds.FirstOrDefault(x => x.Id == id);
+            var result =  _service.Get(id);
             if (result == null)
             {
                 return NotFound();
@@ -27,9 +27,9 @@ namespace CarRental.Ads.Controllers
         }
 
         [HttpPost("create")]
-        public IActionResult Create(CarAdd carAdd)
+        public async Task<IActionResult> Create(CarAdd carAdd)
         {
-            _database.CarAdds.Add(carAdd);
+            await _service.Crete(carAdd);
 
             return Ok(204);
         }

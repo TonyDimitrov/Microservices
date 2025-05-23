@@ -1,5 +1,7 @@
 
+using CarRental.Ads.Messages;
 using CarRental.Ads.Services;
+using MassTransit;
 
 namespace CarRental.Ads
 {
@@ -17,7 +19,16 @@ namespace CarRental.Ads
             builder.Services.AddSwaggerGen();
 
             builder.Services.AddSingleton<IInMemoryDatabase, InMemoryDatabase>();
-            builder.Services.AddTransient<ICarAddService, CarAddService>();
+            builder.Services.AddTransient<ICarAdService, CarAdService>();
+            builder.Services.AddMassTransit(mt =>
+            {
+                mt.UsingRabbitMq((bus, cfg) =>
+                {
+                    cfg.Host("localhost");
+
+                    cfg.ConfigureEndpoints(bus);
+                });
+            });
 
             var app = builder.Build();
 

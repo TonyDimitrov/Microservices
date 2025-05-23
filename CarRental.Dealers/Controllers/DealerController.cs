@@ -30,8 +30,7 @@ namespace CarRental.Dealers.Controllers
         {
             _dealerService.Create(dealer);
 
-
-            return Ok(204);
+            return await Task.FromResult(Ok(204));
         }
     }
 }
