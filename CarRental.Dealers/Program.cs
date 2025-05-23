@@ -52,7 +52,7 @@ namespace CarRental.Dealers
             }
 
             app.UseHttpsRedirection();
-
+            app.UseAuthentication();
             app.UseAuthorization();
 
 
