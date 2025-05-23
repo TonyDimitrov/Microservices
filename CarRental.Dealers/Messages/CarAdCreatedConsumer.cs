@@ -16,7 +16,7 @@ namespace CarRental.Dealers.Messages
             var msg = context.Message;
             var dealer = await _service.GetAsync(msg.DealerId);
             if (dealer != null)
-                _service.Create();
+                _service.Update(msg.DealerId, msg.CarId);
         }
     }
 }

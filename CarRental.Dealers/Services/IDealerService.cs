@@ -7,5 +7,7 @@ namespace CarRental.Dealers.Services
         Task<Dealer> GetAsync(int id);
 
         void Create(Dealer dealer);
+
+        bool Update(int dealerId, int carAdId);
     }
 }
